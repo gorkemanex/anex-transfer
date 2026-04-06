@@ -17,27 +17,9 @@ body { background:var(--dark); color:var(--text); font-family:'DM Sans',sans-ser
 body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
   background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(201,169,110,0.08) 0%,transparent 60%); }
 .container { max-width:560px; margin:0 auto; padding:0 20px; position:relative; z-index:1; }
-
-/* HEADER */
-header {
-  padding:28px 0 24px;
-  border-bottom:1px solid rgba(201,169,110,0.15);
-  margin-bottom:36px;
-}
-.header-top {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-.logo-img {
-  height:20px;
-  width:auto;
-  filter:brightness(0) invert(1);
-  opacity:0.9;
-  display:block;
-  flex-shrink:0;
-}
+header { padding:28px 0 24px; border-bottom:1px solid rgba(201,169,110,0.15); margin-bottom:36px; }
+.header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.logo-img { height:20px; width:auto; filter:brightness(0) invert(1); opacity:0.9; display:block; flex-shrink:0; }
 .lang-switcher { display:flex; gap:4px; flex-shrink:0; }
 .lang-btn { background:none; border:1px solid transparent; color:var(--text-muted);
   font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:0.1em;
@@ -45,16 +27,12 @@ header {
 .lang-btn.active,.lang-btn:hover { border-color:rgba(201,169,110,0.4); color:var(--gold); }
 .logo-line { width:40px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin-bottom:8px; }
 .header-sub { font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); }
-
-/* DATA STATUS */
 .data-status { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);
   margin-bottom:24px; display:flex; align-items:center; gap:6px; }
 .data-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:blink 2s infinite; flex-shrink:0; }
 .data-dot.loading { background:var(--orange); animation:blink 0.6s infinite; }
 .data-dot.error { background:var(--red); animation:none; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-/* FORM */
 .section-label { font-size:10px; letter-spacing:0.35em; text-transform:uppercase; color:var(--text-muted);
   margin-bottom:20px; display:flex; align-items:center; gap:12px; }
 .section-label::after { content:''; flex:1; height:1px; background:rgba(201,169,110,0.1); }
@@ -73,11 +51,9 @@ header {
 .search-btn { width:100%; background:linear-gradient(135deg,var(--gold-dark),var(--gold)); border:none; border-radius:2px;
   padding:16px; color:var(--dark); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500;
   letter-spacing:0.3em; text-transform:uppercase; cursor:pointer; margin-top:20px; transition:all 0.25s; }
-.search-btn:hover { opacity:0.9; } .search-btn:active { transform:scale(0.99); }
+.search-btn:hover { opacity:0.9; }
 .error-msg { background:rgba(232,100,90,0.08); border:1px solid rgba(232,100,90,0.2); border-radius:2px;
   padding:14px 16px; font-size:13px; color:var(--red); margin-top:16px; display:none; }
-
-/* RESULT */
 .result-card { display:none; animation:fadeUp 0.4s ease forwards; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 .result-header { display:flex; align-items:flex-start; justify-content:space-between;
@@ -135,17 +111,15 @@ header {
     <div class="logo-line"></div>
     <div class="header-sub" id="txt-subtitle">Transfer Information</div>
   </header>
-
   <div class="data-status" id="data-status">
     <div class="data-dot loading" id="data-dot"></div>
     <span id="data-status-text">Loading...</span>
   </div>
-
   <div id="search-section">
     <div class="section-label" id="txt-find">Find your transfer</div>
     <div class="input-group">
       <label class="input-label" id="lbl-resno">Reservation Number</label>
-      <input class="input-field" id="inp-resno" type="text" placeholder="e.g. 12243532" autocomplete="off" spellcheck="false" inputmode="numeric">
+      <input class="input-field" id="inp-resno" type="text" placeholder="e.g. 12243532" autocomplete="off" inputmode="numeric">
     </div>
     <div class="divider-or"><span id="txt-or">or search by name</span></div>
     <div class="alt-row">
@@ -158,14 +132,12 @@ header {
         <input class="input-field" id="inp-lname" type="text" autocomplete="off">
       </div>
     </div>
-    <button class="search-btn" onclick="doSearch()" id="btn-search">Search Transfer</button>
-    <div class="error-msg" id="error-msg">Transfer not found. Please check your details.</div>
+    <button class="search-btn" id="btn-search" onclick="doSearch()">Search Transfer</button>
+    <div class="error-msg" id="error-msg">Transfer not found. Please check your reservation number.</div>
   </div>
-
   <div class="loading" id="loading">
     <div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div>
   </div>
-
   <div class="result-card" id="result-card">
     <div class="result-header">
       <div>
@@ -175,7 +147,7 @@ header {
       <div class="status-badge badge-ok" id="res-status"></div>
     </div>
     <div class="change-alert" id="change-alert">
-      <div class="change-alert-title" id="alert-title">⚠ Schedule Updated</div>
+      <div class="change-alert-title" id="alert-title"></div>
       <div class="change-alert-body" id="alert-body"></div>
     </div>
     <div class="transfer-hero">
@@ -188,7 +160,7 @@ header {
         <span class="info-key" id="lbl-flight">Flight</span>
         <span class="info-val">
           <span class="flight-badge">
-            <span>✈</span>
+            <span>&#9992;</span>
             <span class="flight-no" id="res-flight"></span>
             <span class="flight-t" id="res-flighttime"></span>
           </span>
@@ -199,159 +171,13 @@ header {
         <span class="info-val" id="txt-lobby">Hotel Lobby</span>
       </div>
     </div>
-    <button class="new-search-btn" onclick="resetSearch()" id="btn-back">← New Search</button>
+    <button class="new-search-btn" id="btn-back" onclick="resetSearch()">&#8592; New Search</button>
     <div class="footer-note" id="txt-footer">
       Please be ready at the hotel lobby <strong>10 minutes before</strong> your pick-up time.<br>
       For questions, contact the Anex representative or reception.
     </div>
   </div>
 </div>
-
-<script>
-const CSV_URL = "https://docs.google.com/spreadsheets/d/1V5_t0mQ4xTiiauiUcKUpshJauuUe99ii9sGOZa0RFPg/export?format=csv&gid=0";
-let transferData = [];
-let lang = 'en';
-
-const i18n = {
-  en:{subtitle:'Transfer Information',find:'Find your transfer',resno:'Reservation Number',
-    fname:'First Name',lname:'Last Name',or:'or search by name',search:'Search Transfer',
-    departure:'Pick-up Time',flight:'Flight',meeting:'Meeting Point',lobby:'Hotel Lobby',
-    back:'← New Search',status:'Confirmed',
-    footer:'Please be ready at the hotel lobby <strong>10 minutes before</strong> your pick-up time.<br>For questions, contact the Anex representative or reception.',
-    error:'Transfer not found. Please check your reservation number and try again.',
-    dataLive:'Live data — updated daily',
-    alertTitle:'⚠ Schedule Updated',
-    alertBody:'Your pick-up time has been updated. Please note the new time above.'},
-  ru:{subtitle:'Информация о трансфере',find:'Найти трансфер',resno:'Номер бронирования',
-    fname:'Имя',lname:'Фамилия',or:'или поиск по имени',search:'Найти трансфер',
-    departure:'Время подачи',flight:'Рейс',meeting:'Место встречи',lobby:'Лобби отеля',
-    back:'← Назад',status:'Подтверждено',
-    footer:'Пожалуйста, будьте в лобби за <strong>10 минут</strong> до указанного времени.<br>По вопросам обращайтесь к представителю Anex или на ресепшн.',
-    error:'Трансфер не найден. Проверьте номер бронирования и попробуйте снова.',
-    dataLive:'Актуальные данные — обновляются ежедневно',
-    alertTitle:'⚠ Время изменено',
-    alertBody:'Время подачи изменилось. Обратите внимание на обновлённое время.'}
-};
-
-function setLang(l){
-  lang=l;
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
-  const t=i18n[l];
-  const s=(id,html)=>{const el=document.getElementById(id);if(el)el.innerHTML=html;};
-  s('txt-subtitle',t.subtitle);s('txt-find',t.find);s('lbl-resno',t.resno);
-  s('lbl-fname',t.fname);s('lbl-lname',t.lname);s('txt-or',t.or);s('btn-search',t.search);
-  s('txt-departure',t.departure);s('lbl-flight',t.flight);s('lbl-meeting',t.meeting);
-  s('txt-lobby',t.lobby);s('btn-back',t.back);s('txt-footer',t.footer);s('error-msg',t.error);
-  if(document.getElementById('res-status').textContent)s('res-status',t.status);
-}
-
-function parseCSV(text){
-  const lines=text.trim().split('\n');
-  const result=[];
-  for(let i=1;i<lines.length;i++){
-    const cols=lines[i].split(',');
-    const resNo=(cols[0]||'').trim().replace(/"/g,'');
-    if(!resNo)continue;
-    const pickup=(cols[1]||'').trim().replace(/"/g,'');
-    const flightTime=(cols[4]||'').trim().replace(/"/g,'');
-    const hotel=(cols[6]||'').trim().replace(/"/g,'');
-    const flight=(cols[7]||'').trim().replace(/"/g,'').replace(' (GDS)','');
-    result.push({res:resNo,pickup:pickup.slice(0,5),hotel,flight,flightTime:flightTime.slice(0,5)});
-  }
-  return result;
-}
-
-async function loadData(){
-  const dot=document.getElementById('data-dot');
-  const txt=document.getElementById('data-status-text');
-  try{
-    const proxy='https://api.allorigins.win/raw?url=';
-    const res=await fetch(proxy+encodeURIComponent(CSV_URL));
-    if(!res.ok)throw new Error();
-    const csv=await res.text();
-    const lines=csv.trim().split('\n');
-    const seen=new Set();
-    transferData=[];
-    for(let i=1;i<lines.length;i++){
-      const cols=lines[i].split(',');
-      const resNo=(cols[0]||'').trim().replace(/"/g,'');
-      if(!resNo||seen.has(resNo))continue;
-      seen.add(resNo);
-      const pickup=(cols[1]||'').trim().replace(/"/g,'').slice(0,5);
-      const flightTime=(cols[4]||'').trim().replace(/"/g,'').slice(0,5);
-      const hotel=(cols[6]||'').trim().replace(/"/g,'');
-      const flight=(cols[7]||'').trim().replace(/"/g,'').replace(' (GDS)','');
-      transferData.push({res:resNo,pickup,hotel,flight,flightTime});
-    }
-    dot.className='data-dot';
-    txt.textContent=i18n[lang].dataLive;
-    checkStoredChange();
-  }catch(e){
-    dot.className='data-dot error';
-    txt.textContent='⚠ Refresh to try again';
-  }
-}
-
-function checkStoredChange(){
-  const storedPickup=localStorage.getItem('anex_last_pickup');
-  const storedRes=localStorage.getItem('anex_res');
-  if(!storedPickup||!storedRes)return;
-  const fresh=transferData.find(d=>d.res===storedRes);
-  if(fresh&&fresh.pickup!==storedPickup){
-    localStorage.setItem('anex_last_pickup',fresh.pickup);
-    document.getElementById('alert-title').textContent=i18n[lang].alertTitle;
-    document.getElementById('alert-body').textContent=i18n[lang].alertBody;
-    document.getElementById('change-alert').style.display='block';
-    document.getElementById('res-time').textContent=fresh.pickup;
-  }
-}
-
-function normalize(s){return(s||'').toString().trim().toLowerCase().replace(/\s+/g,'');}
-
-function doSearch(){
-  const inp=normalize(document.getElementById('inp-resno').value);
-  const fname=normalize(document.getElementById('inp-fname').value);
-  const lname=normalize(document.getElementById('inp-lname').value);
-  document.getElementById('error-msg').style.display='none';
-  if(!inp&&!(fname&&lname)){document.getElementById('error-msg').style.display='block';return;}
-  if(transferData.length===0){document.getElementById('error-msg').style.display='block';return;}
-  let result=null;
-  if(inp){
-    const long=inp.length<=8?'1'+inp:inp;
-    result=transferData.find(d=>normalize(d.res)===inp||normalize(d.res)===long);
-  }
-  if(!result){document.getElementById('error-msg').style.display='block';return;}
-  document.getElementById('loading').style.display='block';
-  setTimeout(()=>{document.getElementById('loading').style.display='none';showResult(result);},300);
-}
-
-function showResult(d){
-  const t=i18n[lang];
-  localStorage.setItem('anex_res',d.res);
-  localStorage.setItem('anex_last_pickup',d.pickup);
-  document.getElementById('search-section').style.display='none';
-  document.getElementById('res-tag').textContent='Reservation '+d.res;
-  document.getElementById('res-hotel').textContent=d.hotel;
-  document.getElementById('res-status').textContent=t.status;
-  document.getElementById('res-time').textContent=d.pickup||'—';
-  document.getElementById('txt-today').textContent=new Date().toLocaleDateString(
-    lang==='ru'?'ru-RU':'en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  document.getElementById('res-flight').textContent=d.flight||'—';
-  document.getElementById('res-flighttime').textContent=d.flightTime||'';
-  document.getElementById('result-card').style.display='block';
-}
-
-function resetSearch(){
-  localStorage.removeItem('anex_res');localStorage.removeItem('anex_last_pickup');
-  document.getElementById('result-card').style.display='none';
-  document.getElementById('change-alert').style.display='none';
-  document.getElementById('search-section').style.display='block';
-  ['inp-resno','inp-fname','inp-lname'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('error-msg').style.display='none';
-}
-
-document.addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
-loadData();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
