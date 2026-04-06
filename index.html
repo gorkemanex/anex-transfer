@@ -208,7 +208,7 @@ header {
 </div>
 
 <script>
-const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1V5_t0mQ4xTiiauiUcKUpshJauuUe99ii9sGOZa0RFPg/export?format=csv&gid=0";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgGzUBMpXqHTPsXm6rR8_YVJcVoqP4o_qumHU8fbxUOgDo_GhFqzYZ-uzNqbSnfrnx/exec";
 let transferData = [];
 let lang = 'en';
 
@@ -265,14 +265,9 @@ async function loadData(){
   const dot=document.getElementById('data-dot');
   const txt=document.getElementById('data-status-text');
   try{
-    const res=await fetch(SHEETS_URL+"&t="+Date.now());
+    const res=await fetch(SCRIPT_URL);
     if(!res.ok)throw new Error();
-    const csv=await res.text();
-    const seen=new Set();
-    transferData=parseCSV(csv).filter(d=>{
-      if(seen.has(d.res))return false;
-      seen.add(d.res);return true;
-    });
+    transferData=await res.json();
     dot.className='data-dot';
     txt.textContent=i18n[lang].dataLive;
     checkStoredChange();
