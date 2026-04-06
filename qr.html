@@ -37,20 +37,20 @@ code{background:var(--dark-4);border:1px solid rgba(201,169,110,0.15);border-rad
   <div class="title">Transfer QR Code</div>
   <div class="sub">Staff Use Only</div>
   <div class="qr-box"><div id="qrcode"></div></div>
-  <div class="url-text" id="url-display">https://anex-transfer.github.io</div>
+  <div class="url-text" id="url-display">https://gorkemanex.github.io/anex-transfer</div>
   <div>
     <button class="btn" onclick="downloadQR()">Download PNG</button>
     <a class="btn btn-outline" href="index.html">← Guest Page</a>
   </div>
   <div class="note">
-    <strong>Current URL:</strong> <code>https://anex-transfer.github.io</code><br><br>
+    <strong>Current URL:</strong> <code>https://gorkemanex.github.io/anex-transfer</code><br><br>
     IT: update this URL after deploying to your domain. Print this QR and place it in guest rooms or at reception.<br><br>
     <strong>OneDrive:</strong> Update <code>transferdata.xlsx</code> daily. The site fetches live data on each page load — no other action needed.
   </div>
 </div>
 <script>
 const qr = new QRCode(document.getElementById('qrcode'),{
-  text:'https://anex-transfer.github.io',width:240,height:240,
+  text:'https://gorkemanex.github.io/anex-transfer',width:240,height:240,
   colorDark:'#C9A96E',colorLight:'#161616',
   correctLevel:QRCode.CorrectLevel.H
 });
