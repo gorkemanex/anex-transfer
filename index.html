@@ -265,7 +265,7 @@ async function loadData(){
   const dot=document.getElementById('data-dot');
   const txt=document.getElementById('data-status-text');
   try{
-    const res=await fetch(SHEETS_URL);
+    const res=await fetch(SHEETS_URL+"&t="+Date.now());
     if(!res.ok)throw new Error();
     const csv=await res.text();
     const seen=new Set();
